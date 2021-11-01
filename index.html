@@ -41,6 +41,7 @@
   </header>
   <main class="px-3">
     <h1>Should I get the Christmas decorations out yet?</h1>
+    <div class="image mb-2"></div>
     <div class="alert alert-info result" style="text-shadow:none" role="alert">
       Hold on, I'm thinking...
     </div>
@@ -65,7 +66,9 @@
   <script>
       
       var result = $('div.result');
+      var img_container = $('div.image');
       var response = 'What, are you mad? Absolutely <strong>not</strong>!';
+      var img = 'https://i.giphy.com/media/bm02BE6DQ4Oag8GXep/giphy.gif';
       var class_name = 'alert-danger';
       var date = new Date();
       var month = date.getMonth() + 1;
@@ -74,10 +77,12 @@
       if(month < 12) {
         response += ' It\'s not even December yet!';
       } else {
-        class_name = (day < 10) ? 'alert-warning' : (day < 25 ? 'alert-success' : 'alert-danger')
+        class_name = (day < 10) ? 'alert-warning' : (day < 25 ? 'alert-success' : class_name);
+        img = (day < 10) ? 'https://i.giphy.com/media/3o6fJfO5xksMX0VKLe/giphy.gif' : (day < 25 ? 'https://i.giphy.com/media/zhNNxi6S9fnDnm8PP2/giphy.gif' : 'https://i.giphy.com/media/8v6Z3YyULB5Q0Skbac/giphy.gif');
         response = (day < 10 ? 'I guess so, although it\'s literally just December you festive weirdo.' : (day >= 25 ? 'Whaat? <strong>No!</strong> You should be considering taking them down now!' : '<strong>Yes!</strong> It\'s a great time to put the decorations up!'));
       }
 
+      img_container.append('<img style="max-height: 200px" src="'+img+'"/>');
       result.removeClass('alert-info').addClass(class_name);
       result.html(response);
 
